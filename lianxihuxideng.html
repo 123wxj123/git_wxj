@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习呼吸灯</title>
+	<style>
+	    div{
+	    	box-sizing: border-box;
+	    }
+		.content{
+			width: 400px;
+			height: 600px;
+			background-color: black;
+			/*块水平居中*/
+			margin:0 auto;
+			margin-top: 200px;
+		}
+		.content>.box{
+			height: 400px;
+			padding: 40px;
+			/*background-color: red;*/
+			/*应用动画*/
+			animation-name: outer;
+			/*动画的名*/
+			animation-duration: 5s;
+			/*完成一次动画的时间*/
+			animation-timing-function: linear;
+			/*动画的速度曲线 
+			linear 匀速*/
+			animation-iteration-count: infinite;
+			/*动画迭代的次数 
+			infinite 无休止*/
+		}
+		.content>.box>.outer{
+			height: 100%;
+			padding: 20px;
+			border: 5px solid #ccc;
+			border-radius: 50%;
+			/*应用动画*/
+			animation-name: inner;
+			animation-duration: 5s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+		.content>.box>.outer>.inner{
+			height: 100%;
+			border: 20px solid #fff;
+			border-radius: 50%;
+		}
+		/*定义针*/
+		/*外圆的*/
+		@keyframes outer{
+			25%{
+				padding: 30px;
+			}
+			50%{
+				padding: 40px;
+			}
+		}
+		/*内圆*/
+		@keyframes inner{
+			/*目的是在此阶段内，大圆在变大的同时让内圆保持不变
+			所以在将box的padding在变小的情况下，就要将out的padding变大*/
+			25%{
+				padding: 30px;
+			}
+			/*当box的padding在回复正常的时候。outer也跟着回复
+			此阶段结束之后就会出现内圆不动而外圆变小的情况*/
+			50%{
+				padding: 20px;
+			}
+			/*开始让内圆变小
+			在此阶段，只需改变outer的padding大小，将其padding设大即可。
+			因为此时box的padding 已经不再随着outer的padding的变化而变化，
+			此阶段结束后就会出现外圆不变，内圆变小的效果*/
+			75%{
+				padding: 32px;
+			}
+			/*此阶段是内圆回复到原来的大小的时候，即此时是outer的padding变小的时候
+			此阶段结束后整个都恢复到了最初的状态*/
+			100%{
+				padding: 20px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<div class="box">
+			<div class="outer">
+				<div class="inner"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
